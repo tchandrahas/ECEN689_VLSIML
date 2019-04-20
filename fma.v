@@ -1,15 +1,14 @@
-module fma
-#(Q,N)
+module fma #(parameter Q=15, parameter N=32)
 (
   input [N-1:0] a ,
   input [N-1:0] b,
   input [N-1:0] c,
-  output [N-1:0] fma_result,
+  output [N-1:0] fma_result
  );
- wire [N-1] multiplication_result;
+ wire [N-1:0] multiplication_result;
  wire multiplication_overflow;
  // instantiate the multiplier
- qmult #(Q,N) qmult_i0(.i_multiplier(b),i_multiplicand(c),.o_result(multiplication_result),.ovr(multiplication_overflow));
+ qmult#(Q,N) qmult_i0(.i_multiplier(b),.i_multiplicand(c),.o_result(multiplication_result),.ovr(multiplication_overflow));
  // instantiate the adder
- qadd #(Q,N) qadd_i0(.a(fma_result),.b(multiplication_result),.c(a));
+ qadd#(Q,N) qadd_i0(.c(fma_result),.b(multiplication_result),.a(a));
 endmodule
