@@ -18,7 +18,7 @@ generate
       begin
         for(l=j;l<(j+filter_size);l=l+1)
         begin
-          assign sub_input_data[(k-i)*(filter_size)+(l-j)] = input_data[(k*filter_size)+l];
+          assign sub_input_data[(k-i)*(filter_size)+(l-j)] = input_data[(k*input_size)+l];
         end
       end
       conv #(filter_size) conv_i(.filter(filter),.conv_input(sub_input_data),.conv_output(output_data[(i/stride)*((((input_size-filter_size)/stride)+1))+(j/stride)]));
