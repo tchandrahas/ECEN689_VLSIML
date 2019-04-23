@@ -1,7 +1,8 @@
+`include "fma.v"
 module conv #(parameter size = 7)
 (
-  input [size*size-1:0] [31:0] filter  ,
-  input [size*size-1:0][31:0] conv_input  ,
+  input  [31:0] filter [size*size-1:0]  ,
+  input  [31:0] conv_input [size*size-1:0] ,
   output [31:0] conv_output
 );
 

@@ -1,2 +1,8 @@
 *.vvp
 *.vcd
+*.txt
+*.mem
+*.csv
+simv
+simv.daidir/
+csrc/

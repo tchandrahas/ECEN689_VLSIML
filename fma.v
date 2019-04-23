@@ -1,3 +1,5 @@
+`include "qadd.v"
+`include "qmult.v"
 module fma #(parameter Q=15, parameter N=32)
 (
   input [N-1:0] a ,
