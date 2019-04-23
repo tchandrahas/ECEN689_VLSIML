@@ -29,7 +29,7 @@ module test;
     $finish();
   end
   
-  pooling_layer #(4,2) dut(  input_data, pool_output );
+  pooling_single #(4,2) dut(  input_data, pool_output );
   
 endmodule
 
