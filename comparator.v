@@ -2,32 +2,49 @@ module comparator #(parameter Q=16, parameter N=32)
 (
   input [N-1:0] a ,
   input [N-1:0] b,
-  output [N-1:0] c
+  output reg [N-1:0] c
  );
  
-  always@(*) 
-    begin
+always@(*) 
+  begin
+    
     if(a[N-1] == b[N-1])
-    begin
-        if(a[N-1] == 1)
+	begin
+      if(a[N-1] == 1)
         begin
-         if( a[N-2:0] > b[N-2:0] )
-           c=b;
-         else
-           c=a;
+          if( a[N-2:0] > b[N-2:0] )
+            begin
+				c = b; 
+            end
+          else
+            begin
+              c = a;
+            end
         end
-        else 
+      
+      else 
         begin
-         if( a[N-2:0] > b[N-2:0] )
-           c=a;
-         else
-           c=b;        
+          if( a[N-2:0] > b[N-2:0] )
+            begin
+				c = a;
+            end
+          else
+            begin
+				c = b;
+            end
         end
+    
     end
-    else if(a[N-1] > b[N-1])
-      c=a
+    
+    else if(a[N-1] > b[N-1]) 
+      begin
+		c = a;
+      end
+    
     else if(a[N-1] < b[N-1])
-      c=b;
+      begin
+		c = b;
+      end
   end
 
 endmodule
