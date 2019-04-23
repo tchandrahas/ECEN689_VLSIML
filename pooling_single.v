@@ -1,4 +1,4 @@
-module pooling_layer #(parameter input_size, parameter pooling_size)
+module pooling_single #(parameter input_size, parameter pooling_size)
 (
   input [input_size*input_size-1:0] [31:0] input_data,
   output [((input_size/pooling_size)*(input_size/pooling_size))-1:0][31:0] pooling_output
