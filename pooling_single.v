@@ -1,9 +1,10 @@
+`include "max_pool.v"
 module pooling_single #(parameter input_size, parameter pooling_size)
 (
-  input [input_size*input_size-1:0] [31:0] input_data,
-  output [((input_size/pooling_size)*(input_size/pooling_size))-1:0][31:0] pooling_output
+  input  [31:0] input_data [input_size*input_size-1:0],
+  output [31:0] pooling_output [((input_size/pooling_size)*(input_size/pooling_size))-1:0]
  );
-  
+
 genvar i;
 genvar j;
 genvar k;
@@ -26,5 +27,5 @@ generate
     end
   end
 endgenerate
-  
+
 endmodule

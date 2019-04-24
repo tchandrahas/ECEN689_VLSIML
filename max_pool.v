@@ -1,3 +1,4 @@
+`include "comparator.v"
 module max_pool #(parameter window_size = 4)
   (
     input [window_size*window_size-1:0] [31:0] pool_input  ,
@@ -13,7 +14,7 @@ genvar i;
 generate
   for(i=2;i<window_size*window_size;i=i+1)
 
-  begin: fma_generate_loop
+  begin: comparator_generate_loop
 
     comparator #(16,32) comp_i(.a(output_wires[i-2]),.b(pool_input[i]),.c(output_wires[i-1]));
 

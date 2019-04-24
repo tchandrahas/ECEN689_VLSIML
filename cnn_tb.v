@@ -26,7 +26,19 @@ end
 
 initial
 begin
-  $readmemb("binaryoutput.mem",input_data);
+  $readmemb("mnist_test_values.mem",input_data);
+  $monitor("%d\n",input_data[202]);
+end
+initial
+begin
+    #100;
+    $finish();
+end
+initial
+begin
+  $dumpfile("waveform.dump");
+  $dumpvars(0,cnn_tb);
+
 end
 //output [9:0] [31:0] probability
 endmodule
