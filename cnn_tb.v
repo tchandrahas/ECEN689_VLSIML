@@ -1,7 +1,7 @@
 `include "cnn.v"
 module cnn_tb();
-parameter input_size = 28;
-parameter cnn_filter_size = 3;
+parameter input_size = 34;
+parameter cnn_filter_size = 7;
 parameter cnn_num_filters = 16;
 parameter cnn_stride = 2;
 reg clk;

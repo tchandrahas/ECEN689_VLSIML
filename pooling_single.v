@@ -14,7 +14,7 @@ generate
   begin
     for(j=0;j+(pooling_size-1)<input_size;j=j+pooling_size)
     begin
-      wire [pooling_size*pooling_size-1:0] [31:0] sub_input_data;
+      wire [31:0] sub_input_data [pooling_size*pooling_size-1:0] ;
       for(k=i;k<(i+pooling_size);k=k+1)
       begin
         for(l=j;l<(j+pooling_size);l=l+1)
