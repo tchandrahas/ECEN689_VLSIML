@@ -19,7 +19,6 @@ generate
       begin
         for(l=j;l<(j+pooling_size);l=l+1)
         begin
-          wire [31:0] multiplied_output;
           assign sub_input_data[(k-i)*(pooling_size)+(l-j)] = input_data[(k*input_size)+l];
         end
       end

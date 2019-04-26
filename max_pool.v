@@ -6,7 +6,7 @@ module max_pool #(parameter window_size = 4)
   );
 
   wire [31:0] output_wires [window_size*window_size-1:0];
-  assign pool_output = output_wires[window_size*window_size-1];
+  assign pool_output = output_wires[window_size*window_size-2];
 
   comparator #(16,32) comp_i0(.a(pool_input[0]),.b(pool_input[1]),.c(output_wires[0]));
 genvar i;

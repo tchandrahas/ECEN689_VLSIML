@@ -4,46 +4,46 @@ module comparator #(parameter Q=16, parameter N=32)
   input [N-1:0] b,
   output reg [N-1:0] c
  );
- 
-always@(*) 
+
+always@(*)
   begin
-    
+
     if(a[N-1] == b[N-1])
 	begin
       if(a[N-1] == 1)
         begin
           if( a[N-2:0] > b[N-2:0] )
             begin
-				c = b; 
+				        c = b;
             end
           else
             begin
               c = a;
             end
         end
-      
-      else 
+
+      else
         begin
           if( a[N-2:0] > b[N-2:0] )
             begin
-				c = a;
+				        c = a;
             end
           else
             begin
-				c = b;
+				        c = b;
             end
         end
-    
+
     end
-    
-    else if(a[N-1] > b[N-1]) 
+
+    else if(a[N-1] > b[N-1])
       begin
-		c = a;
+		            c = a;
       end
-    
+
     else if(a[N-1] < b[N-1])
       begin
-		c = b;
+		      c = b;
       end
   end
 

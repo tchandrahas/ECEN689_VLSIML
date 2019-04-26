@@ -2,8 +2,10 @@ module fully_connected_layer #(parameter input_size = 32)
 (
   input [31:0] input_data [input_size-1:0],
   input [31:0] weight [input_size-1:0],
+  input [31:0] bias,
   output [31:0]   output_data
 );
+wire [31:0] dot_product_output;
 genvar i;
 generate
   for(i=0;i<input_size;i=i+1)
@@ -19,5 +21,6 @@ generate
     end
   end
 endgenerate
-assign output_data = fma_generate_loop[input_size-1].fma_result;
+assign dot_product_output = fma_generate_loop[input_size-1].fma_result;
+qadd #(15,32) qadd_i(.a(dot_product_output),.b(bias),.c(output_data));
 endmodule

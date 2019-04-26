@@ -3,9 +3,10 @@ module conv #(parameter size = 7)
 (
   input  [31:0] filter [size*size-1:0]  ,
   input  [31:0] conv_input [size*size-1:0] ,
+  input  [31:0] bias,
   output [31:0] conv_output
 );
-
+wire [31:0] dot_product_output;
 genvar i;
 generate
   for(i=0;i<size*size;i=i+1)
@@ -21,5 +22,6 @@ generate
     end
   end
 endgenerate
-assign conv_output = fma_generate_loop[size*size-1].fma_result;
+assign dot_product_output = fma_generate_loop[size*size-1].fma_result;
+qadd #(15,32) qadd_i(.a(dot_product_output),.b(bias),.c(conv_output));
 endmodule
