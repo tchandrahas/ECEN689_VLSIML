@@ -13,14 +13,14 @@ generate
     wire [31:0] fma_result;
     if(i == 0)
     begin
-      fma #(15,32) fma_i0(.a(0),.b(weight[0]),.c(input_data[0]),.fma_result(fma_result));
+      fma #(16,32) fma_i0(.a(0),.b(weight[0]),.c(input_data[0]),.fma_result(fma_result));
     end
     if(i > 0)
     begin
-       fma #(15,32) fma_i(.a(fma_generate_loop[i-1].fma_result),.b(weight[i]),.c(input_data[i]),.fma_result(fma_result));
+       fma #(16,32) fma_i(.a(fma_generate_loop[i-1].fma_result),.b(weight[i]),.c(input_data[i]),.fma_result(fma_result));
     end
   end
 endgenerate
 assign dot_product_output = fma_generate_loop[input_size-1].fma_result;
-qadd #(15,32) qadd_i(.a(dot_product_output),.b(bias),.c(output_data));
+qadd #(16,32) qadd_i(.a(dot_product_output),.b(bias),.c(output_data));
 endmodule

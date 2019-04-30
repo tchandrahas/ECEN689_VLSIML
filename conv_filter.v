@@ -11,9 +11,9 @@ genvar j;
 genvar k;
 genvar l;
 generate
-  for(i=0;i+(filter_size-1)<input_size;i=i+stride)
+  for(i=0;(i+filter_size-1)<input_size;i=i+stride)
   begin
-    for(j=0;j+(filter_size-1)<input_size;j=j+stride)
+    for(j=0;(j+filter_size-1)<input_size;j=j+stride)
     begin
       wire [31:0] sub_input_data [filter_size*filter_size-1:0] ;
       for(k=i;k<(i+filter_size);k=k+1)

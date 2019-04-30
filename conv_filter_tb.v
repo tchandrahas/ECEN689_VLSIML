@@ -4,11 +4,11 @@ module conv_filter_tb;
   parameter filter_size = 5;
   parameter input_size = 7;
   parameter stride = 2;
-  reg [filter_size*filter_size-1:0][31:0] filter ;
-  reg [input_size*input_size-1:0] [31:0] input_data ;
+  reg [31:0] filter [filter_size*filter_size-1:0] ;
+  reg [31:0] input_data [input_size*input_size-1:0] ;
   wire [(((input_size-filter_size)/stride)+1)*(((input_size-filter_size)/stride)+1)-1:0] [31:0] output_data;
   integer i;
-  conv_filter #(.input_size(input_size),.filter_size(filter_size),.stride(stride)) dut(.filter(filter),.input_data(input_data), .output_data(output_data));
+  conv_filter #(.input_size(input_size),.filter_size(filter_size),.stride(stride),.bias(32'b0)) dut(.filter(filter),.input_data(input_data), .output_data(output_data));
   initial
   begin
 

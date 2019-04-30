@@ -25,7 +25,9 @@ module cnn
   input [31:0] conv_filter_weight [conv_num_filters-1:0] [(conv_filter_size*conv_filter_size)-1:0],
   input [31:0] fully_connected_layer_weights [fully_connected_num_layers-1:0][fully_connected_layer_input_size-1:0],
   input [31:0] cnn_filter_bias [conv_num_filters-1:0],
-  input [31:0] fully_connected_layer_bias [fully_connected_num_layers-1:0]
+  input [31:0] fully_connected_layer_bias [fully_connected_num_layers-1:0],
+  output [31:0] fully_connected_layer_output [fully_connected_num_layers-1:0]
+
   //output [9:0] [31:0] probability
 );
 
@@ -34,7 +36,7 @@ wire [31:0] conv_layer_output [conv_num_filters-1:0] [conv_layer_output_size*con
 wire [31:0] relu_layer_output [conv_num_filters-1:0] [relu_layer_input_size*relu_layer_input_size-1:0];
 wire [31:0] pooling_layer_output [conv_num_filters-1:0] [pooling_layer_output_size*pooling_layer_output_size-1:0];
 wire [31:0] pooling_layer_output_straightened [fully_connected_layer_input_size-1:0];
-wire [31:0] fully_connected_layer_output [fully_connected_num_layers-1:0];
+
 // instantiate the cnn layer
 conv_layer #(.num_filters(conv_num_filters),.input_size(input_size),.filter_size(conv_filter_size),.stride(conv_stride))     conv_layer_i0(.input_data(input_data),.filter_weights(conv_filter_weight),.bias(cnn_filter_bias),.conv_layer_output(conv_layer_output));
 // generate to instantiate the relu_layer
@@ -56,7 +58,7 @@ endgenerate
 generate
   for(i=0;i<conv_num_filters;i=i+1)
   begin
-    assign pooling_layer_output_straightened[((i+1)*pooling_layer_output_size*pooling_layer_output_size)-1:(i)*pooling_layer_output_size*pooling_layer_output_size] = pooling_layer_output[i];
+    assign pooling_layer_output_straightened[((i+1)*pooling_layer_output_size*pooling_layer_output_size)-1:(i)*pooling_layer_output_size*pooling_layer_output_size] = pooling_layer_output[i][pooling_layer_output_size*pooling_layer_output_size-1:0];
   end
 endgenerate
 // generate to instantiate fully dense layer
